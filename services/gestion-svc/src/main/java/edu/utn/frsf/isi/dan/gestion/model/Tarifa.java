@@ -14,6 +14,7 @@ public class Tarifa {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
+    private String nombreTarifa;
     private LocalDate fechaInicio;
     private LocalDate fechaFin;
     @ManyToOne

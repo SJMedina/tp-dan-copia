@@ -27,7 +27,8 @@ CREATE TABLE IF NOT EXISTS tp_dan.tipo_habitacion (
     id integer PRIMARY KEY,
     nombre varchar(50) NOT NULL,
     descripcion varchar(255) NOT NULL,
-    capacidad integer NOT NULL
+    capacidad integer NOT NULL,
+    disponible boolean NOT NULL DEFAULT true
 );
 
 INSERT INTO tp_dan.tipo_habitacion (id, nombre, descripcion, capacidad) VALUES
