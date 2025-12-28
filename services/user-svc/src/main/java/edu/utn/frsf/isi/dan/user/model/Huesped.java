@@ -16,7 +16,7 @@ import java.util.List;
 public class Huesped extends Usuario {
 
     private LocalDate fechaNacimiento;
-    @OneToMany(mappedBy = "huesped")
+    @OneToMany(mappedBy = "huesped", cascade = CascadeType.REMOVE, orphanRemoval = true)
     private List<TarjetaCredito> tarjetaCredito;
 
 }

@@ -1,14 +1,14 @@
 {
   "Servers": {
     "1": {
-      "Name": "PostgreSQL Local",
+      "Name": "Postgres (docker)",
       "Group": "Servers",
       "Host": "postgres-db",
       "Port": 5432,
       "MaintenanceDB": "appdb",
       "Username": "appuser",
-      "SSLMode": "prefer",
-      "PassFile": "/pgpass"
+      "Password": "apppwd",
+      "SSLMode": "prefer"
     }
   }
 }

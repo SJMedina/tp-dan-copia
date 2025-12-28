@@ -21,4 +21,6 @@ public class Banco {
     private Integer id;
 
     private String nombre;
+
+    private String cbu;
 }

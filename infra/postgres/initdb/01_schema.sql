@@ -27,7 +27,8 @@ CREATE TABLE IF NOT EXISTS tp_dan.tipo_habitacion (
     id integer PRIMARY KEY,
     nombre varchar(50) NOT NULL,
     descripcion varchar(255) NOT NULL,
-    capacidad integer NOT NULL
+    capacidad integer NOT NULL,
+    disponible boolean NOT NULL DEFAULT true
 );
 
 INSERT INTO tp_dan.tipo_habitacion (id, nombre, descripcion, capacidad) VALUES
@@ -65,7 +66,7 @@ CREATE TABLE IF NOT EXISTS tp_dan.habitacion (
     numero integer NOT NULL,
     piso integer NOT NULL,
     id_tipo integer NOT NULL REFERENCES tp_dan.tipo_habitacion(id),
-    id_hotel integer NOT NULL REFERENCES tp_dan.hotel(id)
+    id_hotel integer REFERENCES tp_dan.hotel(id)
 );
 
 -- Secuencia para amenity_hotel_id_seq

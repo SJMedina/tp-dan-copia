@@ -40,12 +40,12 @@ public class GestionMessageListener {
         ackMode = "MANUAL"
     )
     //public void receiveMessage(Message message, com.rabbitmq.client.Channel channel) throws Exception {
-    public void receiveMessage(String payload, Channel channel, @Header(AmqpHeaders.DELIVERY_TAG) long deliveryTag ){   
+    public void receiveMessage(String payload, Channel channel, @Header(AmqpHeaders.DELIVERY_TAG) long deliveryTag ){
         try {
-            log.debug("[RabbitMQ] Mensaje recibido: {}"+payload);
+            log.debug("[RabbitMQ] Mensaje recibido: {}", payload);
             HabitacionEvent habitacionEvent = objectMapper.readValue(payload, HabitacionEvent.class);
             log.info("Evento recibido: {}", habitacionEvent);
-            // Aquí puedes procesar el evento recibido            
+            // Aquí puedes procesar el evento recibido
             habitacionService.handleEvent(habitacionEvent);
             channel.basicAck(deliveryTag, false);
         } catch (Exception e) {

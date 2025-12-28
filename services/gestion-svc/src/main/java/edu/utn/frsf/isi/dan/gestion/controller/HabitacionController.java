@@ -1,9 +1,9 @@
 /**
  * Controlador REST para la gestión de entidades {@link Habitacion}.
  * Proporciona endpoints para crear, obtener, actualizar y eliminar habitaciones.
- * 
+ *
  * <p>Las rutas expuestas por este controlador están bajo el prefijo <code>/habitaciones</code>.</p>
- * 
+ *
  * <ul>
  *     <li><b>POST /habitaciones</b>: Crea una nueva habitación.</li>
  *     <li><b>GET /habitaciones/{id}</b>: Obtiene una habitación por su identificador.</li>
@@ -11,7 +11,7 @@
  *     <li><b>PUT /habitaciones/{id}</b>: Actualiza una habitación existente.</li>
  *     <li><b>DELETE /habitaciones/{id}</b>: Elimina una habitación por su identificador.</li>
  * </ul>
- * 
+ *
  * @author martindominguez
  */
 package edu.utn.frsf.isi.dan.gestion.controller;
@@ -24,7 +24,6 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-
 @RestController
 @RequestMapping("/habitaciones")
 public class HabitacionController {
@@ -32,8 +31,17 @@ public class HabitacionController {
     private HabitacionService habitacionService;
 
     @PostMapping
-    public ResponseEntity<Habitacion> create(@RequestBody Habitacion habitacion) {
-        return ResponseEntity.ok(habitacionService.save(habitacion));
+    public ResponseEntity<?> create(@RequestBody Habitacion habitacion) {
+        try {
+            Habitacion saved = habitacionService.save(habitacion);
+            return ResponseEntity.ok(saved);
+        } catch (RuntimeException e) {
+            e.printStackTrace(); // Log the full stack trace
+            return ResponseEntity.badRequest().body(e.getMessage());
+        } catch (Exception e) {
+            e.printStackTrace(); // Log the full stack trace
+            return ResponseEntity.status(500).body("Error interno: " + e.getMessage());
+        }
     }
 
     @GetMapping("/{id}")
@@ -50,14 +58,16 @@ public class HabitacionController {
 
     @PutMapping("/{id}")
     public ResponseEntity<Habitacion> update(@PathVariable Integer id, @RequestBody Habitacion habitacion) {
-        if (!habitacionService.findById(id).isPresent()) return ResponseEntity.notFound().build();
+        if (!habitacionService.findById(id).isPresent())
+            return ResponseEntity.notFound().build();
         habitacion.setId(id);
         return ResponseEntity.ok(habitacionService.save(habitacion));
     }
 
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> delete(@PathVariable Integer id) {
-        if (!habitacionService.findById(id).isPresent()) return ResponseEntity.notFound().build();
+        if (!habitacionService.findById(id).isPresent())
+            return ResponseEntity.notFound().build();
         habitacionService.deleteById(id);
         return ResponseEntity.noContent().build();
     }

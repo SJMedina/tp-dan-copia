@@ -2,19 +2,19 @@ version: "3.9"
 
 services:
   mysql:
-    image: mysql:8.3                # versión recomendada
+    image: mysql:8.3
     container_name: mysql-users
     restart: unless-stopped
     environment:
-      MYSQL_DATABASE: users         # se crea al iniciar
+      MYSQL_DATABASE: users
       MYSQL_USER: usr_app
       MYSQL_PASSWORD: usrapp
       MYSQL_ROOT_PASSWORD: rootpwd
       TZ: America/Argentina/Cordoba
-    ports:                          # solo para desarrollo
+    ports:
       - "3306:3306"
     volumes:
-      - mysql_data:/var/lib/mysql   # persistencia
+      - mysql_data:/var/lib/mysql
       - ./mysql/initdb/:/docker-entrypoint-initdb.d/:ro
     healthcheck:
       test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
@@ -68,7 +68,7 @@ services:
     depends_on:
       - postgres
     volumes:
-      - ./pgadmin/config/servers/:/pgadmin4/servers/
+      - ./pgadmin/config/servers.json:/pgadmin4/servers.json
       - pgadmin_data:/var/lib/pgadmin
 
   rabbitmq:
@@ -76,14 +76,14 @@ services:
     container_name: rabbitmq
     restart: unless-stopped
     ports:
-      - "5672:5672"   # puerto para aplicaciones
-      - "15672:15672" # puerto para la consola web de administración
+      - "5672:5672"    # puerto para aplicaciones
+      - "15672:15672"  # consola web de administración
     environment:
       RABBITMQ_DEFAULT_USER: admin
       RABBITMQ_DEFAULT_PASS: admin
     volumes:
-      # Monta el archivo de definiciones en la ruta que lee RabbitMQ al arrancar
-      - ./rabbitmq/definitions.json:/etc/rabbitmq/definitions.json
+      - ./rabbitmq/definitions.json:/etc/rabbitmq/definitions.json:ro
+
   mongodb:
     image: mongo:7
     container_name: mongodb
@@ -101,9 +101,13 @@ services:
     container_name: mongo-express
     restart: unless-stopped
     environment:
+      ME_CONFIG_MONGODB_SERVER: mongodb
+      ME_CONFIG_MONGODB_PORT: 27017
+      ME_CONFIG_MONGODB_ENABLE_ADMIN: "true"
       ME_CONFIG_MONGODB_ADMINUSERNAME: root
       ME_CONFIG_MONGODB_ADMINPASSWORD: rootpwd
-      ME_CONFIG_MONGODB_SERVER: mongodb
+      ME_CONFIG_BASICAUTH_USERNAME: admin
+      ME_CONFIG_BASICAUTH_PASSWORD: admin
     ports:
       - "6091:8081"
     depends_on:
@@ -121,7 +125,16 @@ services:
       - mysql
       - rabbitmq
     environment:
-      SPRING_PROFILES_ACTIVE: default
+      # force Spring to use the internal docker service name "mysql" (resuelve dentro de la red)
+      - SPRING_DATASOURCE_URL=jdbc:mysql://mysql:3306/users?allowPublicKeyRetrieval=true&useSSL=false&serverTimezone=UTC
+      - SPRING_DATASOURCE_USERNAME=usr_app
+      - SPRING_DATASOURCE_PASSWORD=usrapp
+      - SPRING_DATASOURCE_HIKARI_INITIALIZATION_FAIL_TIMEOUT=-1
+      # rabbit
+      - SPRING_RABBITMQ_HOST=rabbitmq
+      - SPRING_RABBITMQ_PORT=5672
+      # perfil
+      - SPRING_PROFILES_ACTIVE=default
 
   reservas-svc:
     build:
@@ -134,7 +147,7 @@ services:
       - mongodb
       - rabbitmq
     environment:
-      SPRING_PROFILES_ACTIVE: default
+      - SPRING_PROFILES_ACTIVE=default
 
   gestion-svc:
     build:
@@ -144,12 +157,16 @@ services:
     ports:
       - "8083:8080"
     depends_on:
-      - mysql
+      - postgres
       - rabbitmq
     environment:
-      SPRING_PROFILES_ACTIVE: default
-
-
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://postgres-db:5432/appdb
+      - SPRING_DATASOURCE_USERNAME=appuser
+      - SPRING_DATASOURCE_PASSWORD=apppwd
+      - SPRING_DATASOURCE_HIKARI_INITIALIZATION_FAIL_TIMEOUT=-1
+      - SPRING_RABBITMQ_HOST=rabbitmq
+      - SPRING_RABBITMQ_PORT=5672
+      - SPRING_PROFILES_ACTIVE=default
 
 volumes:
   mysql_data:

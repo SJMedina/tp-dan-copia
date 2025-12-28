@@ -15,7 +15,9 @@ public record PropietarioRecord(
     @Email(message = "El email no es válido")
     String email,
     @NotBlank(message = "El teléfono no puede estar vacío")
-    String telefono,    
+    String telefono,
+    @NotBlank(message = "El DNI no puede estar vacío")
+    String dni,
     Long idHotel,
     CuentaBancariaRecord cuentaBancaria
 ) {
@@ -23,7 +25,8 @@ public record PropietarioRecord(
         Propietario propietario = new Propietario();
         propietario.setNombre(this.nombre);
         propietario.setEmail(this.email);
-        propietario.setTelefono(this.telefono);        
+        propietario.setTelefono(this.telefono);
+        propietario.setDni(this.dni);
         CuentaBancaria cuentaBancaria = this.cuentaBancaria.toCuentaBancaria();
         propietario.setCuentaBancaria(cuentaBancaria);
         return propietario;

@@ -14,6 +14,10 @@ public class HotelService {
     private HotelRepository hotelRepository;
 
     public Hotel save(Hotel hotel) {
+        // Establecer la referencia bidireccional para los amenities
+        if (hotel.getAmenities() != null) {
+            hotel.getAmenities().forEach(amenity -> amenity.setHotel(hotel));
+        }
         return hotelRepository.save(hotel);
     }
 

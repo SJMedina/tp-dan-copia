@@ -16,31 +16,31 @@
             "header": [ { "key": "Content-Type", "value": "application/json" } ],
             "body": {
               "mode": "raw",
-              "raw": "{\n  \"nombre\": \"Hotel Test\",\n  \"cuit\": \"20123456789\",\n  \"domicilio\": \"Calle 123\",\n  \"latitud\": -31.4167,\n  \"longitud\": -64.1833,\n  \"telefono\": \"3511234567\",\n  \"correoContacto\": \"contacto@hotel.com\",\n  \"categoria\": \"3 estrellas\"\n}"
+              "raw": "{\n  \"nombre\": \"Hotel Test\",\n  \"cuit\": \"20123456789\",\n  \"domicilio\": \"Calle 123\",\n  \"latitud\": -31.4167,\n  \"longitud\": -64.1833,\n  \"telefono\": \"3511234567\",\n  \"correoContacto\": \"contacto@hotel.com\",\n  \"categoria\": 3\n}"
             },
-            "url": { "raw": "http://localhost:8080/hoteles", "protocol": "http", "host": ["localhost"], "port": "8080", "path": ["hoteles"] }
+            "url": { "raw": "http://localhost:8083/hoteles", "protocol": "http", "host": ["localhost"], "port": "8083", "path": ["hoteles"] }
           }
         },
         {
           "name": "Obtener todos los Hoteles",
-          "request": { "method": "GET", "url": { "raw": "http://localhost:8080/hoteles", "protocol": "http", "host": ["localhost"], "port": "8080", "path": ["hoteles"] } }
+          "request": { "method": "GET", "url": { "raw": "http://localhost:8083/hoteles", "protocol": "http", "host": ["localhost"], "port": "8083", "path": ["hoteles"] } }
         },
         {
           "name": "Obtener Hotel por ID",
-          "request": { "method": "GET", "url": { "raw": "http://localhost:8080/hoteles/1", "protocol": "http", "host": ["localhost"], "port": "8080", "path": ["hoteles", "1"] } }
+          "request": { "method": "GET", "url": { "raw": "http://localhost:8083/hoteles/1", "protocol": "http", "host": ["localhost"], "port": "8083", "path": ["hoteles", "1"] } }
         },
         {
           "name": "Actualizar Hotel",
           "request": {
             "method": "PUT",
             "header": [ { "key": "Content-Type", "value": "application/json" } ],
-            "body": { "mode": "raw", "raw": "{\n  \"nombre\": \"Hotel Actualizado\",\n  \"cuit\": \"20123456789\",\n  \"domicilio\": \"Calle 456\",\n  \"latitud\": -31.4167,\n  \"longitud\": -64.1833,\n  \"telefono\": \"3517654321\",\n  \"correoContacto\": \"nuevo@hotel.com\",\n  \"categoria\": \"4 estrellas\"\n}" },
-            "url": { "raw": "http://localhost:8080/hoteles/1", "protocol": "http", "host": ["localhost"], "port": "8080", "path": ["hoteles", "1"] }
+            "body": { "mode": "raw", "raw": "{\n  \"nombre\": \"Hotel Actualizado\",\n  \"cuit\": \"20123456789\",\n  \"domicilio\": \"Calle 456\",\n  \"latitud\": -31.4167,\n  \"longitud\": -64.1833,\n  \"telefono\": \"3517654321\",\n  \"correoContacto\": \"nuevo@hotel.com\",\n  \"categoria\": 4\n}" },
+            "url": { "raw": "http://localhost:8083/hoteles/1", "protocol": "http", "host": ["localhost"], "port": "8083", "path": ["hoteles", "1"] }
           }
         },
         {
           "name": "Eliminar Hotel",
-          "request": { "method": "DELETE", "url": { "raw": "http://localhost:8080/hoteles/1", "protocol": "http", "host": ["localhost"], "port": "8080", "path": ["hoteles", "1"] } }
+          "request": { "method": "DELETE", "url": { "raw": "http://localhost:8083/hoteles/1", "protocol": "http", "host": ["localhost"], "port": "8083", "path": ["hoteles", "1"] } }
         }
       ]
     },
@@ -53,16 +53,16 @@
             "method": "POST",
             "header": [ { "key": "Content-Type", "value": "application/json" } ],
             "body": { "mode": "raw", "raw": "{\n  \"id\": 10,\n  \"nombre\": \"SUITE\",\n  \"descripcion\": \"Suite de lujo\",\n  \"capacidad\": 2\n}" },
-            "url": { "raw": "http://localhost:8080/tipos-habitacion", "protocol": "http", "host": ["localhost"], "port": "8080", "path": ["tipos-habitacion"] }
+            "url": { "raw": "http://localhost:8083/tipos-habitacion", "protocol": "http", "host": ["localhost"], "port": "8083", "path": ["tipos-habitacion"] }
           }
         },
         {
           "name": "Obtener todos los TiposHabitacion",
-          "request": { "method": "GET", "url": { "raw": "http://localhost:8080/tipos-habitacion", "protocol": "http", "host": ["localhost"], "port": "8080", "path": ["tipos-habitacion"] } }
+          "request": { "method": "GET", "url": { "raw": "http://localhost:8083/tipos-habitacion", "protocol": "http", "host": ["localhost"], "port": "8083", "path": ["tipos-habitacion"] } }
         },
         {
           "name": "Obtener TipoHabitacion por ID",
-          "request": { "method": "GET", "url": { "raw": "http://localhost:8080/tipos-habitacion/1", "protocol": "http", "host": ["localhost"], "port": "8080", "path": ["tipos-habitacion", "1"] } }
+          "request": { "method": "GET", "url": { "raw": "http://localhost:8083/tipos-habitacion/1", "protocol": "http", "host": ["localhost"], "port": "8083", "path": ["tipos-habitacion", "1"] } }
         },
         {
           "name": "Actualizar TipoHabitacion",
@@ -70,12 +70,12 @@
             "method": "PUT",
             "header": [ { "key": "Content-Type", "value": "application/json" } ],
             "body": { "mode": "raw", "raw": "{\n  \"id\": 10,\n  \"nombre\": \"SUITE ACTUALIZADA\",\n  \"descripcion\": \"Suite de lujo renovada\",\n  \"capacidad\": 3\n}" },
-            "url": { "raw": "http://localhost:8080/tipos-habitacion/10", "protocol": "http", "host": ["localhost"], "port": "8080", "path": ["tipos-habitacion", "10"] }
+            "url": { "raw": "http://localhost:8083/tipos-habitacion/10", "protocol": "http", "host": ["localhost"], "port": "8083", "path": ["tipos-habitacion", "10"] }
           }
         },
         {
           "name": "Eliminar TipoHabitacion",
-          "request": { "method": "DELETE", "url": { "raw": "http://localhost:8080/tipos-habitacion/10", "protocol": "http", "host": ["localhost"], "port": "8080", "path": ["tipos-habitacion", "10"] } }
+          "request": { "method": "DELETE", "url": { "raw": "http://localhost:8083/tipos-habitacion/10", "protocol": "http", "host": ["localhost"], "port": "8083", "path": ["tipos-habitacion", "10"] } }
         }
       ]
     },
@@ -88,16 +88,16 @@
             "method": "POST",
             "header": [ { "key": "Content-Type", "value": "application/json" } ],
             "body": { "mode": "raw", "raw": "{\n  \"fechaInicio\": \"2025-06-01\",\n  \"fechaFin\": \"2025-06-10\",\n  \"tipoHabitacion\": {\"id\": 1},\n  \"precioNoche\": 15000.00\n}" },
-            "url": { "raw": "http://localhost:8080/tarifas", "protocol": "http", "host": ["localhost"], "port": "8080", "path": ["tarifas"] }
+            "url": { "raw": "http://localhost:8083/tarifas", "protocol": "http", "host": ["localhost"], "port": "8083", "path": ["tarifas"] }
           }
         },
         {
           "name": "Obtener todas las Tarifas",
-          "request": { "method": "GET", "url": { "raw": "http://localhost:8080/tarifas", "protocol": "http", "host": ["localhost"], "port": "8080", "path": ["tarifas"] } }
+          "request": { "method": "GET", "url": { "raw": "http://localhost:8083/tarifas", "protocol": "http", "host": ["localhost"], "port": "8083", "path": ["tarifas"] } }
         },
         {
           "name": "Obtener Tarifa por ID",
-          "request": { "method": "GET", "url": { "raw": "http://localhost:8080/tarifas/1", "protocol": "http", "host": ["localhost"], "port": "8080", "path": ["tarifas", "1"] } }
+          "request": { "method": "GET", "url": { "raw": "http://localhost:8083/tarifas/1", "protocol": "http", "host": ["localhost"], "port": "8083", "path": ["tarifas", "1"] } }
         },
         {
           "name": "Actualizar Tarifa",
@@ -105,12 +105,12 @@
             "method": "PUT",
             "header": [ { "key": "Content-Type", "value": "application/json" } ],
             "body": { "mode": "raw", "raw": "{\n  \"fechaInicio\": \"2025-06-05\",\n  \"fechaFin\": \"2025-06-15\",\n  \"tipoHabitacion\": {\"id\": 1},\n  \"precioNoche\": 18000.00\n}" },
-            "url": { "raw": "http://localhost:8080/tarifas/1", "protocol": "http", "host": ["localhost"], "port": "8080", "path": ["tarifas", "1"] }
+            "url": { "raw": "http://localhost:8083/tarifas/1", "protocol": "http", "host": ["localhost"], "port": "8083", "path": ["tarifas", "1"] }
           }
         },
         {
           "name": "Eliminar Tarifa",
-          "request": { "method": "DELETE", "url": { "raw": "http://localhost:8080/tarifas/1", "protocol": "http", "host": ["localhost"], "port": "8080", "path": ["tarifas", "1"] } }
+          "request": { "method": "DELETE", "url": { "raw": "http://localhost:8083/tarifas/1", "protocol": "http", "host": ["localhost"], "port": "8083", "path": ["tarifas", "1"] } }
         }
       ]
     },
@@ -123,16 +123,16 @@
             "method": "POST",
             "header": [ { "key": "Content-Type", "value": "application/json" } ],
             "body": { "mode": "raw", "raw": "{\n  \"numero\": 101,\n  \"piso\": 1,\n  \"tipoHabitacion\": {\"id\": 1}\n}" },
-            "url": { "raw": "http://localhost:8080/habitaciones", "protocol": "http", "host": ["localhost"], "port": "8080", "path": ["habitaciones"] }
+            "url": { "raw": "http://localhost:8083/habitaciones", "protocol": "http", "host": ["localhost"], "port": "8083", "path": ["habitaciones"] }
           }
         },
         {
           "name": "Obtener todas las Habitaciones",
-          "request": { "method": "GET", "url": { "raw": "http://localhost:8080/habitaciones", "protocol": "http", "host": ["localhost"], "port": "8080", "path": ["habitaciones"] } }
+          "request": { "method": "GET", "url": { "raw": "http://localhost:8083/habitaciones", "protocol": "http", "host": ["localhost"], "port": "8083", "path": ["habitaciones"] } }
         },
         {
           "name": "Obtener Habitacion por ID",
-          "request": { "method": "GET", "url": { "raw": "http://localhost:8080/habitaciones/1", "protocol": "http", "host": ["localhost"], "port": "8080", "path": ["habitaciones", "1"] } }
+          "request": { "method": "GET", "url": { "raw": "http://localhost:8083/habitaciones/1", "protocol": "http", "host": ["localhost"], "port": "8083", "path": ["habitaciones", "1"] } }
         },
         {
           "name": "Actualizar Habitacion",
@@ -140,12 +140,12 @@
             "method": "PUT",
             "header": [ { "key": "Content-Type", "value": "application/json" } ],
             "body": { "mode": "raw", "raw": "{\n  \"numero\": 102,\n  \"piso\": 1,\n  \"tipoHabitacion\": {\"id\": 1}\n}" },
-            "url": { "raw": "http://localhost:8080/habitaciones/1", "protocol": "http", "host": ["localhost"], "port": "8080", "path": ["habitaciones", "1"] }
+            "url": { "raw": "http://localhost:8083/habitaciones/1", "protocol": "http", "host": ["localhost"], "port": "8083", "path": ["habitaciones", "1"] }
           }
         },
         {
           "name": "Eliminar Habitacion",
-          "request": { "method": "DELETE", "url": { "raw": "http://localhost:8080/habitaciones/1", "protocol": "http", "host": ["localhost"], "port": "8080", "path": ["habitaciones", "1"] } }
+          "request": { "method": "DELETE", "url": { "raw": "http://localhost:8083/habitaciones/1", "protocol": "http", "host": ["localhost"], "port": "8083", "path": ["habitaciones", "1"] } }
         }
       ]
     }

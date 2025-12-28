@@ -21,5 +21,5 @@ public class Habitacion {
     @ManyToOne
     @JoinColumn(name = "id_hotel")
     private Hotel hotel;
-    
+
 }

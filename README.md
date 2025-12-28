@@ -52,9 +52,15 @@ Tendremos los microservicios spring boot
 # Ejecucion
 Para levantar los servicios spring boot
 ```
-cd service\user-svc
+cd services\user-svc
 ./mvnw spring-boot:run -DskipTests
 ```
+Para bajar los servicios spring boot
+```
+Ctrl + C
+```
+
+
 
 ## Enunciado 
 
